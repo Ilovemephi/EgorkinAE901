@@ -107,7 +107,7 @@ public class StatisticsCalculator {
     }
     
     
-    public double[] calculateConfidenceInterval(List<Double> data, double confidenceLevel) {
+    public double[] calculateConfidenceInterval(List<Double> data, double confidenceLevel) { // доверительный интервал 
         if (data == null || data.isEmpty()) {
             throw new IllegalArgumentException("Список данных не может быть пустым.");
         }
@@ -119,9 +119,9 @@ public class StatisticsCalculator {
         double stdDev = stats.getStandardDeviation();
         int n = data.size();
 
-        // Критическое значение для нормального распределения (Z-оценка)
-        double zScore = 1.96; // Для 95% уровня доверия
-        double marginOfError = zScore * (stdDev / Math.sqrt(n));
+        // из таблицы значений Лапласа получаем следующий квантиль
+        double quantille = 1.96; // Для 95% уровня доверия
+        double marginOfError = quantille * (stdDev / Math.sqrt(n));
 
         double lowerBound = mean - marginOfError;
         double upperBound = mean + marginOfError;
