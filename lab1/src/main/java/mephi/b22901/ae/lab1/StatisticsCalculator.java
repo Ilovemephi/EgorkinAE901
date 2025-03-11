@@ -107,5 +107,25 @@ public class StatisticsCalculator {
     }
     
     
-    
+    public double[] calculateConfidenceInterval(List<Double> data, double confidenceLevel) {
+        if (data == null || data.isEmpty()) {
+            throw new IllegalArgumentException("Список данных не может быть пустым.");
+        }
+        DescriptiveStatistics stats = new DescriptiveStatistics();
+        for (double value : data) {
+            stats.addValue(value);
+        }
+        double mean = stats.getMean();
+        double stdDev = stats.getStandardDeviation();
+        int n = data.size();
+
+        // Критическое значение для нормального распределения (Z-оценка)
+        double zScore = 1.96; // Для 95% уровня доверия
+        double marginOfError = zScore * (stdDev / Math.sqrt(n));
+
+        double lowerBound = mean - marginOfError;
+        double upperBound = mean + marginOfError;
+
+        return new double[]{lowerBound, upperBound};
+}
 }
