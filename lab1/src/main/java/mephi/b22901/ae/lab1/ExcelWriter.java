@@ -3,6 +3,7 @@ package mephi.b22901.ae.lab1;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
@@ -20,30 +21,33 @@ public class ExcelWriter {
         Sheet sheet = workbook.createSheet("Statistics");
 
         // Создаем заголовки для таблицы
-        String[] headers = {
-                "Столбец",
-                "Среднее геометрическое",
-                "Среднее арифметическое",
-                "Стандартное отклонение",
-                "Размах",
-                "Коэффициент вариации",
-                "Дисперсия"
-        };
+        List<String> headers = new ArrayList<>();
+        headers.add("Столбец");
+        headers.add("Среднее геометрическое");
+        headers.add("Среднее арифметическое");
+        headers.add("Стандартное отклонение");
+        headers.add("Размах");
+        headers.add("Коэффициент вариации");
+        headers.add("Дисперсия");
+        headers.add("Максимум");
+        headers.add("Минимум");
+        headers.add("Количество элементов");
+        headers.add("Доверительный интервал (нижняя граница)");
+        headers.add("Доверительный интервал (верхняя граница)");
         
         // Добавляем заголовки для ковариаций
-        int covIndex = headers.length;
         for (int i = 0; i < columnNames.size(); i++) {
-            for (int j = i + 1; j < columnNames.size(); j++) {
-                String covHeader = "Ковариация " + columnNames.get(i) + "-" + columnNames.get(j);
-                headers[covIndex++] = covHeader;
-            }
+        for (int j = i + 1; j < columnNames.size(); j++) {
+            headers.add("Ковариация " + columnNames.get(i) + "-" + columnNames.get(j));
         }
+    }
+
         
         // Создаем первую строку с заголовками
         Row headerRow = sheet.createRow(0);
-        for (int i = 0; i < headers.length; i++) {
+        for (int i = 0; i < headers.size(); i++) {
             Cell cell = headerRow.createCell(i);
-            cell.setCellValue(headers[i]);
+            cell.setCellValue(headers.get(i));
         }
         
         // Заполняем таблицу данными
@@ -63,7 +67,11 @@ public class ExcelWriter {
             row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Размах", 0.0));
             row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Коэффициент вариации", 0.0));
             row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Дисперсия", 0.0));
-            
+            row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Максимум", 0.0));
+            row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Минимум", 0.0));
+            row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Количество элементов", 0.0));
+            row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Доверительный интервал (нижняя граница)", 0.0));
+            row.createCell(cellIndex++).setCellValue(columnStats.getOrDefault("Доверительный интервал (верхняя граница)", 0.0));
             // Значения ковариаций
             for (int i = 0; i < columnNames.size(); i++) {
                 for (int j = i + 1; j < columnNames.size(); j++) {
