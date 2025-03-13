@@ -101,8 +101,14 @@ public class StatisticsCalculator {
             throw new IllegalArgumentException("Размеры выборок должны совпадать для расчета ковариации.");
         }
         Covariance covariance = new Covariance();
-        double[] array1 = data1.stream().mapToDouble(Double::doubleValue).toArray();
-        double[] array2 = data2.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] array1 = new double[data1.size()];
+        double[] array2 = new double[data2.size()];
+        for (int i = 0; i < data1.size(); i++){
+            array1[i] = data1.get(i);
+        }
+        for (int i = 0; i < data2.size(); i++){
+            array2[i] = data2.get(i);
+        }
         return covariance.covariance(array1, array2);
     }
     
