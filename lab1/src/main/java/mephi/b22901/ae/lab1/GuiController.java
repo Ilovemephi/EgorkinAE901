@@ -14,6 +14,7 @@ public class GuiController {
     private ExcelReader excelReader;
     private ExcelWriter excelWriter;
     private StatisticsController statisticsController;
+    private String currentSheetName;
 
     public GuiController(MainGui mainGui) {
         this.guiView = mainGui;
@@ -42,9 +43,27 @@ public class GuiController {
                     // Получаем путь к выбранному файлу
                     String filePath = fileChooser.getSelectedFile().getAbsolutePath();
                     guiView.displayMessage("Выбран файл: " + filePath);
+                    
+                    List<String> sheetNames = excelReader.getSheetNames(filePath);
+                    
+                    String selectedSheet = (String) JOptionPane.showInputDialog(
+                        null,
+                        "Выберите лист для анализа:",
+                        "Выбор листа",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        sheetNames.toArray(),
+                        sheetNames.get(0)
+                    );
+                    
+                    if (selectedSheet != null){
+                        currentSheetName = selectedSheet;
+                    }
+                    
+                    
 
                     // Читаем данные из файла
-                    HashMap<String, List<Double>> data = excelReader.readData(filePath);
+                    HashMap<String, List<Double>> data = excelReader.readData(filePath, selectedSheet);
                     dataStorage.setData(data);
 
                     // Отображаем сообщение об успешном импорте
@@ -64,6 +83,9 @@ public class GuiController {
     private class ExportButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (currentSheetName == null){
+                guiView.displayErrorMessage("Сначала импортируйте данные");
+            }
             JFileChooser fileChooser = new JFileChooser();
             int returnValue = fileChooser.showSaveDialog(null);
 
