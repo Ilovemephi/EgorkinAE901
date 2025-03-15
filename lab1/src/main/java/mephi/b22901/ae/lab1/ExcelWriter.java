@@ -15,11 +15,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelWriter {
     
-    public void writeData(String filePath, HashMap<String, HashMap<String, Double>> statistics, List<String> columnNames) throws IOException {
+    public void writeData(String filePath, HashMap<String, HashMap<String, Double>> statistics, List<String> columnNames, String SheetName) throws IOException {
     Workbook workbook = new XSSFWorkbook();
 
     // Лист для основных статистических показателей
-    Sheet statsSheet = workbook.createSheet("Statistics");
+    Sheet statsSheet = workbook.createSheet(SheetName);
     createStatisticsTable(statsSheet, statistics, columnNames);
 
     // Лист для ковариационной матрицы

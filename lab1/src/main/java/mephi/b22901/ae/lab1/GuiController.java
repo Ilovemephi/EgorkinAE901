@@ -102,7 +102,7 @@ public class GuiController {
                     HashMap<String, HashMap<String, Double>> statistics = statisticsController.calculateAllStatistics(dataStorage);
 
                     // Экспортируем данные в файл
-                    excelWriter.writeData(filePath, statistics, columnNames);
+                    excelWriter.writeData(filePath, statistics, columnNames, currentSheetName);
 
                     // Отображаем сообщение об успешном экспорте
                     guiView.displayMessage("Данные успешно экспортированы.");
