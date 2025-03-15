@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelReader {
     
-    public HashMap<String, List<Double>> readData(String filePath) throws FileNotFoundException, IOException{
+    public HashMap<String, List<Double>> readData(String filePath, String sheetName) throws FileNotFoundException, IOException{
         HashMap<String, List<Double>> dataMap = new HashMap<>();
         
         FileInputStream fis = null;
@@ -23,7 +23,10 @@ public class ExcelReader {
         try{
             fis = new FileInputStream(new File(filePath));
             workbook = new XSSFWorkbook(fis);
-            Sheet sheet = workbook.getSheetAt(0);
+            Sheet sheet = workbook.getSheet(sheetName);
+            if (sheet == null){
+                 throw new IllegalArgumentException("Лист с таким именем не найден.");
+            }
             
             // Определяем заголовки (названия столбцов)
             Row headerRow = sheet.getRow(0);
@@ -80,7 +83,36 @@ public class ExcelReader {
         }
 
         return dataMap; 
-        
+    }
+    
+    public List<String> getSheetNames(String filePath) throws IOException{
+        List <String> sheetNames = new ArrayList<>();
+        FileInputStream fis = null;
+        Workbook workbook = null;
+        try{
+            fis = new FileInputStream(new File(filePath));
+            workbook = new XSSFWorkbook(fis);
+            int numberOfSheets = workbook.getNumberOfSheets();
+            for (int i = 0; i < numberOfSheets; i++){
+            sheetNames.add(workbook.getSheetName(i));
+            }  
+        } catch(IOException ex){
+            System.err.println("Ошибка при чтении списка листов: " + ex.getMessage());
+            throw ex;
+        } finally {
+            try{
+                if (workbook != null){
+                    workbook.close();
+                }
+                if (fis != null){
+                    fis.close();
+                }
+                
+            } catch(IOException ex){
+                System.err.println("Ошибка при закрытии файла: " + ex.getMessage());
+            }
+        }
+        return sheetNames;
         
     }
     
