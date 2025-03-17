@@ -1,6 +1,7 @@
 package mephi.b22901.ae.lab1;
 
 import java.util.List;
+import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
@@ -124,10 +125,14 @@ public class StatisticsCalculator {
         double mean = stats.getMean();
         double stdDev = stats.getStandardDeviation();
         int n = data.size();
+        int degreesOfFreedom = n - 1;
+        double alpha = 1 - confidenceLevel;
+        double tailProbability = alpha/2;
+        
+        TDistribution tDist = new TDistribution(degreesOfFreedom);
+        double quantile = tDist.inverseCumulativeProbability(1 - tailProbability); 
 
-        // из таблицы значений Лапласа получаем следующий квантиль
-        double quantille = 1.96; // Для 95% уровня доверия
-        double marginOfError = quantille * (stdDev / Math.sqrt(n));
+        double marginOfError = quantile * (stdDev / Math.sqrt(n));
 
         double lowerBound = mean - marginOfError;
         double upperBound = mean + marginOfError;
