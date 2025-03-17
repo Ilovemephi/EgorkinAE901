@@ -29,9 +29,9 @@ public class GuiController {
         guiView.setExitButtonListener(new ExitButtonListener());
     }
 
-    /**
-     * Обработчик события для кнопки "Импортировать данные".
-     */
+    
+     //Обработчик события для кнопки "Импортировать данные".
+     
     private class ImportButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -77,9 +77,9 @@ public class GuiController {
         }
     }
 
-    /**
-     * Обработчик события для кнопки "Экспортировать данные".
-     */
+    
+     //Обработчик события для кнопки "Экспортировать данные".
+     
     private class ExportButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -115,9 +115,9 @@ public class GuiController {
         }
     }
 
-    /**
-     * Обработчик события для кнопки "Выход".
-     */
+    
+     //Обработчик события для кнопки "Выход".
+     
     private class ExitButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
