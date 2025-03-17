@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelReader {
     
     public HashMap<String, List<Double>> readData(String filePath, String sheetName) throws FileNotFoundException, IOException{
-        HashMap<String, List<Double>> dataMap = new HashMap<>();
+        HashMap<String, List<Double>> dataMap = new LinkedHashMap<>();
         
         FileInputStream fis = null;
         Workbook workbook = null;

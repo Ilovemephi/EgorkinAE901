@@ -84,34 +84,42 @@ public class ExcelWriter {
     }
     
     
+    
+    
+    
     private void createCovarianceMatrix(Sheet sheet, HashMap<String, HashMap<String, Double>> statistics, List<String> columnNames) {
-        // Создаем заголовки для ковариационной матрицы
-        Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue(""); // Пустая ячейка в углу
-        for (int i = 0; i < columnNames.size(); i++) {
-            headerRow.createCell(i + 1).setCellValue(columnNames.get(i));
-        }
+    // Создаем заголовки для ковариационной матрицы
+    Row headerRow = sheet.createRow(0);
+    headerRow.createCell(0).setCellValue(""); // Пустая ячейка в углу
+    for (int i = 0; i < columnNames.size(); i++) {
+        headerRow.createCell(i + 1).setCellValue(columnNames.get(i));
+    }
 
-        // Заполняем матрицу
-        for (int i = 0; i < columnNames.size(); i++) {
-            Row row = sheet.createRow(i + 1);
-            row.createCell(0).setCellValue(columnNames.get(i)); // Название строки
+    // Заполняем матрицу
+    for (int i = 0; i < columnNames.size(); i++) {
+        Row row = sheet.createRow(i + 1);
+        row.createCell(0).setCellValue(columnNames.get(i)); // Название строки
 
-            for (int j = 0; j < columnNames.size(); j++) {
+        for (int j = 0; j < columnNames.size(); j++) {
+            if (i == j) {
+                // На диагонали записываем дисперсию (ковариация переменной с самой собой)
+                String varianceKey = "Дисперсия";
+                double variance = statistics.get(columnNames.get(i)).getOrDefault(varianceKey, 0.0);
+                row.createCell(j + 1).setCellValue(variance);
+            } else {
+                // Для недиагональных элементов записываем ковариацию
                 String covKey = "Ковариация " + columnNames.get(i) + "-" + columnNames.get(j);
                 double covariance = statistics.get(columnNames.get(i)).getOrDefault(covKey, 0.0);
 
                 // Для симметрии убедитесь, что ключи Cov(X,Y) и Cov(Y,X) дают одинаковые значения
-                if (i != j) {
-                    String reverseCovKey = "Ковариация " + columnNames.get(j) + "-" + columnNames.get(i);
-                    covariance = statistics.get(columnNames.get(j)).getOrDefault(reverseCovKey, covariance);
-                }
+                String reverseCovKey = "Ковариация " + columnNames.get(j) + "-" + columnNames.get(i);
+                covariance = statistics.get(columnNames.get(j)).getOrDefault(reverseCovKey, covariance);
 
                 row.createCell(j + 1).setCellValue(covariance);
             }
         }
     }
-    
+}
     
     
 
