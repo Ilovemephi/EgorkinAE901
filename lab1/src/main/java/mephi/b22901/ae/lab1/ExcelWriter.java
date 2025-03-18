@@ -111,7 +111,7 @@ public class ExcelWriter {
                 String covKey = "Ковариация " + columnNames.get(i) + "-" + columnNames.get(j);
                 double covariance = statistics.get(columnNames.get(i)).getOrDefault(covKey, 0.0);
 
-                // Для симметрии убедитесь, что ключи Cov(X,Y) и Cov(Y,X) дают одинаковые значения
+                
                 String reverseCovKey = "Ковариация " + columnNames.get(j) + "-" + columnNames.get(i);
                 covariance = statistics.get(columnNames.get(j)).getOrDefault(reverseCovKey, covariance);
 
