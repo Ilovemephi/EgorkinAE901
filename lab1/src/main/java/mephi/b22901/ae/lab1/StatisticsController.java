@@ -44,12 +44,7 @@ public class StatisticsController {
         return allStatistics;
     }
 
-    /**
-     * Рассчитывает статистические показатели для одного столбца данных.
-     *
-     * @param columnData Список числовых значений столбца.
-     * @return Карта с рассчитанными показателями.
-     */
+    
     private HashMap<String, Double> calculateColumnStatistics(List<Double> columnData) {
         HashMap<String, Double> statistics = new HashMap<>();
 
