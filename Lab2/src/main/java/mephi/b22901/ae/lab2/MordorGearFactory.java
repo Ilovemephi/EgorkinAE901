@@ -5,18 +5,18 @@ package mephi.b22901.ae.lab2;
 public class MordorGearFactory implements OrcGearFactory {
 
     @Override
-    public String createWeapon() {
-        return "HardSword";
+    public Weapon createWeapon() {
+        return new HeavySword();
     }
 
     @Override
-    public String createArmor() {
-        return "SteelArmor";
+    public Armor createArmor() {
+        return new SteelArmor();
     }
 
     @Override
-    public String createBanner() {
-        return "RedEyeBanner";
+    public Banner createBanner() {
+        return new RedEyeBanner();
                 
     }
     

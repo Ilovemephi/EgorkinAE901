@@ -5,18 +5,18 @@ package mephi.b22901.ae.lab2;
 public class DolGuldurGearFactory implements OrcGearFactory {
 
     @Override
-    public String createWeapon() {
-        return "Spear";
+    public Weapon createWeapon() {
+        return new Spear();
     }
 
     @Override
-    public String createArmor() {
-        return "Chainmail";
+    public Armor createArmor() {
+        return new Chainmail();
     }
 
     @Override
-    public String createBanner() {
-        return "SpiderBanner";
+    public Banner createBanner() {
+        return new SpiderBanner();
     }
     
 }

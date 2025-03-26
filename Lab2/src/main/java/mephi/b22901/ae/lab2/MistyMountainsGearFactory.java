@@ -5,18 +5,18 @@ package mephi.b22901.ae.lab2;
 public class MistyMountainsGearFactory implements OrcGearFactory {
 
     @Override
-    public String createWeapon() {
-       return "Axe";
+    public Weapon createWeapon() {
+       return new Axe();
     }
 
     @Override
-    public String createArmor() {
-        return "Leatherarmor";
+    public Armor createArmor() {
+        return new LeatherArmor();
     }
 
     @Override
-    public String createBanner() {
-        return "MoonBanner";
+    public Banner createBanner() {
+        return new MoonBanner();
        
     }
     
