@@ -11,4 +11,11 @@
         <maven.compiler.target>22</maven.compiler.target>
         <exec.mainClass>mephi.b22901.ae.lab2.Lab2</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version> <!-- Убедитесь, что версия актуальна -->
+        </dependency>
+    </dependencies>
 </project>

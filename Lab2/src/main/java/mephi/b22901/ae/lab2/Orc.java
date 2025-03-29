@@ -4,9 +4,9 @@ package mephi.b22901.ae.lab2;
 
 public class Orc {
     private String name;
-    private String weapon;
-    private String armor;
-    private String banner;
+    private Weapon weapon;
+    private Armor armor;
+    private Banner banner;
     private int strength;
     private int dexterity;
     private int iq;
@@ -19,13 +19,13 @@ public class Orc {
     public void setName(String name){
         this.name = name;
     }
-    public void setWeapon(String weapon){
+    public void setWeapon(Weapon weapon){
         this.weapon = weapon;
     }
-    public void setArmor(String armor){
+    public void setArmor(Armor armor){
         this.armor = armor;
     }
-    public void setBanner(String banner){
+    public void setBanner(Banner banner){
         this.banner = banner;
     }
     public void setStrength(int strength){
@@ -44,13 +44,13 @@ public class Orc {
     public String getName(){
         return name;
     }
-    public String getWeapon(){
+    public Weapon getWeapon(){
         return weapon;
     }
-    public String getArmor(){
+    public Armor getArmor(){
         return armor;
     }
-    public String getBanner(){
+    public Banner getBanner(){
         return banner;
     }
     public int getStrength(){
