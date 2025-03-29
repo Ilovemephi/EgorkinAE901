@@ -25,6 +25,7 @@ public class ArmyFactoryManager {
         OrcDirector director = new OrcDirector(null);
 
         for (int i = 0; i < tribes.length; i++) {
+            
             // Получаем строителя для текущего племени
             OrcBuilder builder = factories[i].createOrcBuilder();
             director.setBuilder(builder);
@@ -44,10 +45,6 @@ public class ArmyFactoryManager {
 
         return army;
     }
-    
-    
-
-    
-    
+   
     
 }
