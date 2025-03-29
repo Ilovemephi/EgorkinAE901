@@ -26,11 +26,9 @@ public class OrcDirector {
     public Orc createLeaderOrk() {
         builder.createNewOrс();
         builder.buildName();
-        builder.buildWeapon(); // Базовое оружие (например, меч)
+        builder.buildWeapon(); 
         builder.buildArmor();
-        builder.buildBanner(); // Командир получает знамя
-
-        // Заменяем оружие на горн
+        builder.buildBanner(); 
         builder.buildSpecialWeapon(new Horn());
         builder.buildStrength();
         builder.buildDexterity();
