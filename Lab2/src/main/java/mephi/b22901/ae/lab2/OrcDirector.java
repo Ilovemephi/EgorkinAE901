@@ -10,6 +10,11 @@ public class OrcDirector {
         this.builder = builder;
     }
     
+    // Метод для установки строителя
+    public void setBuilder(OrcBuilder builder) {
+        this.builder = builder;
+    }
+    
     public Orc createBasicOrk() {
         builder.createNewOrс();
         builder.buildName();
