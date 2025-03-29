@@ -66,4 +66,14 @@ public class Orc {
         return health;
     }
     
+//    public String getRole() {
+//        if (banner != null && weapon instanceof Horn) {
+//            return "Командир";
+//        } else if (weapon instanceof Bow) {
+//            return "Разведчик";
+//        } else {
+//            return "Базовый";
+//        }
+//    }
+    
 }

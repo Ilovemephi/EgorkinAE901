@@ -60,5 +60,10 @@ public class MordorOrcBuilder implements OrcBuilder {
     public Orc getOrc() {
         return this.orc;
     }
+
+    @Override
+    public void buildSpecialWeapon(Weapon weapon) {
+        this.orc.setWeapon(weapon);
+    }
     
 }

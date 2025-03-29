@@ -4,6 +4,7 @@ public interface OrcBuilder {
     void createNewOrс();
     void buildName();
     void buildWeapon();
+    void buildSpecialWeapon(Weapon weapon);
     void buildArmor();
     void buildBanner();
     void buildStrength();
