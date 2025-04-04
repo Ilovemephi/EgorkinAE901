@@ -3,18 +3,14 @@ package mephi.b22901.ae.lab2;
 
 import com.github.javafaker.Faker;
 
-public class MordorOrcBuilder implements OrcBuilder {
-    private Orc orc;
+public class MordorOrcBuilder extends OrcBuilder {
     private MordorGearFactory mgf;
     
     public MordorOrcBuilder(MordorGearFactory mgf){
         this.mgf = mgf;
     }
 
-    @Override
-    public void createNewOrс() {
-        this.orc = new Orc();
-    }
+    
 
     @Override
     public void buildName() {

@@ -10,18 +10,14 @@ import java.util.Set;
 
 
 
-public class DolGuldurOrcBuilder implements OrcBuilder {
-    private Orc orc;
+public class DolGuldurOrcBuilder extends OrcBuilder {
     private DolGuldurGearFactory dggf;
     
     public DolGuldurOrcBuilder (DolGuldurGearFactory dggf){
         this.dggf = dggf;
     }
 
-    @Override
-    public void createNewOrс() {
-       this.orc = new Orc();
-    }
+    
 
     @Override
     public void buildName() {
