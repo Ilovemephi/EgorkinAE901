@@ -1,8 +1,13 @@
 
 package mephi.b22901.ae.lab2;
 
+import java.awt.BorderLayout;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
@@ -12,16 +17,18 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 
-public class OrcArmyApp {
+public class OrcArmyView {
     private JFrame frame;
     private JTree armyTree;
     private DefaultTreeModel treeModel;
     private DefaultMutableTreeNode root;
     private OrcInfoPanel infoPanel;
+    private JComboBox<String> tribeComboBox;
+    private JComboBox<String> roleComboBox;
+    private JButton createOrcButton;
 
-    public OrcArmyApp() {
+    public OrcArmyView() {
         initializeGUI();
-        initializeArmy();
     }
     
     private void initializeGUI() {
@@ -34,17 +41,7 @@ public class OrcArmyApp {
         root = new DefaultMutableTreeNode("Армия Мордора");
         treeModel = new DefaultTreeModel(root);
         armyTree = new JTree(treeModel);
-        armyTree.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
-                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) armyTree.getLastSelectedPathComponent();
-                if (selectedNode != null && selectedNode.getUserObject() instanceof Orc) {
-                    Orc selectedOrc = (Orc) selectedNode.getUserObject();
-                    infoPanel.displayOrcInfo(selectedOrc);
-                }
-            }
-        });
-        
+       
         JScrollPane treeScrollPane = new JScrollPane(armyTree);
 
         // Создаем панель информации об орке
@@ -53,28 +50,53 @@ public class OrcArmyApp {
         // Разделяем окно на две части: дерево и панель информации
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeScrollPane, infoPanel);
         splitPane.setDividerLocation(300);
+        
+        // Добавляем элементы выбора племени и роли
+        tribeComboBox = new JComboBox<>(new String[]{"Мордор", "Дол Гулдур", "Мглистые Горы"});
+        roleComboBox = new JComboBox<>(new String[]{"Базовый", "Командир", "Разведчик"});
 
-        frame.add(splitPane);
+        JPanel controlPanel = new JPanel();
+        controlPanel.add(createOrcButton);
+        controlPanel.add(new JLabel("Племя:"));
+        controlPanel.add(tribeComboBox);
+        controlPanel.add(new JLabel("Роль:"));
+        controlPanel.add(roleComboBox);
+
+        frame.add(splitPane, BorderLayout.CENTER);
+        frame.add(controlPanel, BorderLayout.NORTH);
         frame.setVisible(true);
+
         
     }
     
-    private void initializeArmy() {
-        // Получаем племена и фабрики
-        String[] tribes = ArmyFactoryManager.getTribes();
-        OrcBuilderFactory[] factories = ArmyFactoryManager.createFactories();
+    public void addCreateOrcListener(java.awt.event.ActionListener listener) {
+        createOrcButton.addActionListener(listener);
+    }
 
-        // Создаем армию орков
-        List<Orc> army = ArmyFactoryManager.createArmy(factories, tribes);
+    public void addTreeSelectionListener(javax.swing.event.TreeSelectionListener listener) {
+        armyTree.addTreeSelectionListener(listener);
+    }
 
-        // Добавляем орков в дерево
-        for (Orc orc : army) {
-            String tribe = orc.getRole(); // Используем роль как племя
-            addOrcToArmy(orc, tribe);
-        }
+    public String getSelectedTribe() {
+        return (String) tribeComboBox.getSelectedItem();
+    }
+
+    public String getSelectedRole() {
+        return (String) roleComboBox.getSelectedItem();
     }
     
-    // Метод для добавления орка в дерево
+    public Orc getSelectedOrc() {
+        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) armyTree.getLastSelectedPathComponent();
+        if (selectedNode != null && selectedNode.getUserObject() instanceof Orc) {
+            return (Orc) selectedNode.getUserObject();
+        }
+        return null;
+    }
+
+    public void displayOrcInfo(Orc orc) {
+        infoPanel.displayOrcInfo(orc);
+    }
+
     public void addOrcToArmy(Orc orc, String tribe) {
         DefaultMutableTreeNode tribeNode = findTribeNode(tribe);
         if (tribeNode == null) {
@@ -94,5 +116,9 @@ public class OrcArmyApp {
         }
         return null;
     }
+    
+   
+    
+    
     
 }

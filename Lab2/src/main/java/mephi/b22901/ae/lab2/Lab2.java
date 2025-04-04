@@ -8,7 +8,7 @@ public class Lab2 {
     public static void main(String[] args) {
         // Используем SwingUtilities.invokeLater для корректной работы с GUI
         SwingUtilities.invokeLater(() -> {
-            new OrcArmyApp(); // Создаем экземпляр графического интерфейса
+            new OrcArmyView(); // Создаем экземпляр графического интерфейса
         });
         
     }
