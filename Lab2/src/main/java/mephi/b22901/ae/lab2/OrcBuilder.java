@@ -1,6 +1,6 @@
 package mephi.b22901.ae.lab2;
 
-public interface OrcBuilder {
+public interface OrcBuilder { 
     void createNewOrс();
     void buildName();
     void buildWeapon();
