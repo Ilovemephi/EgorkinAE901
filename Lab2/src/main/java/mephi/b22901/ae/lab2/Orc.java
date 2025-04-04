@@ -12,9 +12,11 @@ public class Orc {
     private int iq;
     private int health;
     
-    public Orc(){
+    
+    public Orc() {
         
     }
+
     
     public void setName(String name){
         this.name = name;
