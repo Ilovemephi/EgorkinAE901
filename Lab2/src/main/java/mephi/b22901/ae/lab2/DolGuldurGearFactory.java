@@ -18,5 +18,15 @@ public class DolGuldurGearFactory implements OrcGearFactory {
     public Banner createBanner() {
         return new SpiderBanner();
     }
+
+    @Override
+    public Weapon createScoutWeapon() {
+        return new Bow();
+    }
+
+    @Override
+    public Weapon createLeaderWeapon() {
+        return new Ax();
+    }
     
 }

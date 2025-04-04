@@ -69,7 +69,7 @@ public class Orc {
     }
     
     public String getRole() {
-        if (banner != null && weapon instanceof Horn) {
+        if (banner != null && weapon instanceof Ax) {
             return "Командир";
         } else if (weapon instanceof Bow) {
             return "Разведчик";

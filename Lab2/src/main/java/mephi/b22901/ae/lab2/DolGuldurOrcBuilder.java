@@ -2,6 +2,8 @@
 package mephi.b22901.ae.lab2;
 
 import com.github.javafaker.Faker;
+import java.util.HashSet;
+import java.util.Set;
 
 
 
@@ -70,8 +72,14 @@ public class DolGuldurOrcBuilder implements OrcBuilder {
     }
 
     @Override
-    public void buildSpecialWeapon(Weapon weapon) {
-        this.orc.setWeapon(weapon);
+    public void buildScoutWeapon() {
+        this.orc.setWeapon(dggf.createScoutWeapon());
+    }
+
+    @Override
+    public void buildLeaderWeapon() {
+        this.orc.setWeapon(dggf.createLeaderWeapon());
+        
     }
     
 }

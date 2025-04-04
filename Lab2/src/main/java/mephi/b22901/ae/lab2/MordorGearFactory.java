@@ -19,5 +19,15 @@ public class MordorGearFactory implements OrcGearFactory {
         return new RedEyeBanner();
                 
     }
+
+    @Override
+    public Weapon createScoutWeapon() {
+        return new Bow();
+    }
+
+    @Override
+    public Weapon createLeaderWeapon() {
+        return new Ax();
+    }
     
 }

@@ -34,7 +34,7 @@ public class OrcDirector {
         builder.buildWeapon(); 
         builder.buildArmor();
         builder.buildBanner(); 
-        builder.buildSpecialWeapon(new Horn());
+        //builder.buildScoutWeapon();
         builder.buildStrength();
         builder.buildDexterity();
         builder.buildIq();
@@ -45,7 +45,7 @@ public class OrcDirector {
     public Orc createScoutOrk() {
         builder.createNewOrс();
         builder.buildName();
-        builder.buildSpecialWeapon(new Bow());
+        builder.buildScoutWeapon();
         builder.buildArmor();
         builder.buildStrength();
         builder.buildDexterity();

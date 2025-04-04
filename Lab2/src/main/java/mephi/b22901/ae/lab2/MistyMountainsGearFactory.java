@@ -19,5 +19,16 @@ public class MistyMountainsGearFactory implements OrcGearFactory {
         return new MoonBanner();
        
     }
+
+    @Override
+    public Weapon createScoutWeapon() {
+        return new Bow();
+    }
+
+    @Override
+    public Weapon createLeaderWeapon() {
+        return new Ax();
+    }
+    
     
 }

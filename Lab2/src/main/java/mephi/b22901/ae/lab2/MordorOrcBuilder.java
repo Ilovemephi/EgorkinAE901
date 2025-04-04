@@ -62,8 +62,13 @@ public class MordorOrcBuilder implements OrcBuilder {
     }
 
     @Override
-    public void buildSpecialWeapon(Weapon weapon) {
-        this.orc.setWeapon(weapon);
+    public void buildScoutWeapon() {
+        this.orc.setWeapon(mgf.createScoutWeapon());
+    }
+
+    @Override
+    public void buildLeaderWeapon() {
+        this.orc.setWeapon(mgf.createLeaderWeapon());
     }
     
 }

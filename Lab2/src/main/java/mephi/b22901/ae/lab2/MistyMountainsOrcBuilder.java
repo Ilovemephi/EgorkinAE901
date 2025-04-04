@@ -64,8 +64,13 @@ public class MistyMountainsOrcBuilder implements OrcBuilder {
     }
 
     @Override
-    public void buildSpecialWeapon(Weapon weapon) {
-        this.orc.setWeapon(weapon);
+    public void buildScoutWeapon() {
+        this.orc.setWeapon(mmgf.createScoutWeapon());
+    }
+
+    @Override
+    public void buildLeaderWeapon() {
+        this.orc.setWeapon(mmgf.createScoutWeapon());
     }
     
 }
