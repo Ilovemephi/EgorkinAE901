@@ -82,9 +82,9 @@ public class OrcInfoPanel extends JPanel {
         roleLabel.setText(orc.getRole());
 
         // Обновляем снаряжение
-        weaponLabel.setText(orc.getWeapon() != null ? orc.getWeapon().getName() : "No weapon");
-        armorLabel.setText(orc.getArmor() != null ? orc.getArmor().getName() : "No armor");
-        bannerLabel.setText(orc.getBanner() != null ? orc.getBanner().getName() : "No banner");
+        weaponLabel.setText(orc.getWeapon() != null ? orc.getWeapon().getName() : "Нет оружия");
+        armorLabel.setText(orc.getArmor() != null ? orc.getArmor().getName() : "Нет брони");
+        bannerLabel.setText(orc.getBanner() != null ? orc.getBanner().getName() : "Нет баннера");
 
         // Обновляем характеристики
         strengthBar.setValue(orc.getStrength());

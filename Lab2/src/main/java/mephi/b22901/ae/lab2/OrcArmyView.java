@@ -1,10 +1,12 @@
-
 package mephi.b22901.ae.lab2;
 
-
-import java.awt.*;
-import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -21,8 +23,19 @@ public class OrcArmyView {
     private JComboBox<String> roleComboBox;
     private JButton createOrcButton;
 
+    // Карта фабрик для разных племен
+    private Map<String, OrcBuilderFactory> factoryMap;
+
     public OrcArmyView() {
+        initializeFactories();
         initializeGUI();
+    }
+
+    private void initializeFactories() {
+        factoryMap = new HashMap<>();
+        factoryMap.put("Мордор", new MordorOrcBuilderFactory());
+        factoryMap.put("Дол Гулдур", new DolGuldurBuilderFactory());
+        factoryMap.put("Мглистые Горы", new MistyMountainsOrcBuilderFactory());
     }
 
     private void initializeGUI() {
@@ -61,40 +74,15 @@ public class OrcArmyView {
 
         frame.add(splitPane, BorderLayout.CENTER);
         frame.add(controlPanel, BorderLayout.NORTH);
+
+        // Настройка слушателей событий
+        createOrcButton.addActionListener(new CreateOrcButtonListener());
+        armyTree.addTreeSelectionListener(new TreeSelectionHandler());
+
         frame.setVisible(true);
     }
 
-    // Метод для добавления слушателя для кнопки
-    public void addCreateOrcListener(ActionListener listener) {
-        createOrcButton.addActionListener(listener);
-    }
-
-    // Метод для добавления слушателя для выбора орка в дереве
-    public void addTreeSelectionListener(TreeSelectionListener listener) {
-        armyTree.addTreeSelectionListener(listener);
-    }
-
-    public String getSelectedTribe() {
-        return (String) tribeComboBox.getSelectedItem();
-    }
-
-    public String getSelectedRole() {
-        return (String) roleComboBox.getSelectedItem();
-    }
-
-    public Orc getSelectedOrc() {
-        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) armyTree.getLastSelectedPathComponent();
-        if (selectedNode != null && selectedNode.getUserObject() instanceof Orc) {
-            return (Orc) selectedNode.getUserObject();
-        }
-        return null;
-    }
-
-    public void displayOrcInfo(Orc orc) {
-        infoPanel.displayOrcInfo(orc);
-    }
-
-    public void addOrcToArmy(Orc orc, String tribe) {
+    private void addOrcToArmy(Orc orc, String tribe) {
         DefaultMutableTreeNode tribeNode = findTribeNode(tribe);
         if (tribeNode == null) {
             tribeNode = new DefaultMutableTreeNode(tribe);
@@ -112,5 +100,53 @@ public class OrcArmyView {
             }
         }
         return null;
+    }
+
+    // Слушатель для кнопки создания орка
+    private class CreateOrcButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String tribe = (String) tribeComboBox.getSelectedItem();
+            String role = (String) roleComboBox.getSelectedItem();
+
+            if (tribe == null || role == null) {
+                JOptionPane.showMessageDialog(frame, "Выберите племя и роль.", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            OrcBuilderFactory factory = factoryMap.get(tribe);
+            if (factory == null) {
+                JOptionPane.showMessageDialog(frame, "Фабрика для племени не найдена: " + tribe, "Ошибка", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            OrcBuilder builder = factory.createOrcBuilder();
+            OrcDirector director = new OrcDirector(builder);
+
+            Orc newOrc = null;
+            if ("Базовый".equals(role)) {
+                newOrc = director.createBasicOrk();
+            } else if ("Командир".equals(role)) {
+                newOrc = director.createLeaderOrk();
+            } else if ("Разведчик".equals(role)) {
+                newOrc = director.createScoutOrk();
+            }
+
+            if (newOrc != null) {
+                addOrcToArmy(newOrc, tribe);
+            }
+        }
+    }
+
+    // Слушатель для выбора орка в дереве
+    private class TreeSelectionHandler implements TreeSelectionListener {
+        @Override
+        public void valueChanged(TreeSelectionEvent e) {
+            DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) armyTree.getLastSelectedPathComponent();
+            if (selectedNode != null && selectedNode.getUserObject() instanceof Orc) {
+                Orc selectedOrc = (Orc) selectedNode.getUserObject();
+                infoPanel.displayOrcInfo(selectedOrc);
+            }
+        }
     }
 }

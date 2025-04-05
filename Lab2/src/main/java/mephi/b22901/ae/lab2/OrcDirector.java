@@ -18,7 +18,6 @@ public class OrcDirector {
         builder.buildName();
         builder.buildWeapon();
         builder.buildArmor();
-        builder.buildBanner();
         builder.buildStrength();
         builder.buildDexterity();
         builder.buildIq();
