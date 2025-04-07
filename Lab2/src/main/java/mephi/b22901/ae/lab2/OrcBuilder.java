@@ -11,7 +11,7 @@ public abstract class OrcBuilder {
        
 
     public void buildName(){
-        this.orc.setName(Faker.instance().lordOfTheRings().character());
+        this.orc.setName(Faker.instance().lordOfTheRings().character() + "morg");
     }
     public abstract void buildWeapon();
     public abstract void buildScoutWeapon();

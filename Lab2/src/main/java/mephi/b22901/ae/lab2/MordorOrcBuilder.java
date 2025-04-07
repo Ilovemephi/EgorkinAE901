@@ -12,10 +12,7 @@ public class MordorOrcBuilder extends OrcBuilder {
 
     
 
-    @Override
-    public void buildName() {
-        this.orc.setName(Faker.instance().lordOfTheRings().character());
-    }
+   
 
     @Override
     public void buildWeapon() {

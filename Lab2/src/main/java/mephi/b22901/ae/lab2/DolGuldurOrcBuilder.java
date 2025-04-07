@@ -19,10 +19,7 @@ public class DolGuldurOrcBuilder extends OrcBuilder {
 
     
 
-    @Override
-    public void buildName() {
-        this.orc.setName(Faker.instance().lordOfTheRings().character());
-    }
+    
 
     @Override
     public void buildWeapon() {

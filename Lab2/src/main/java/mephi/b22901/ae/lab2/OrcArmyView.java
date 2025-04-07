@@ -23,7 +23,7 @@ public class OrcArmyView {
     private JComboBox<String> roleComboBox;
     private JButton createOrcButton;
 
-    // Карта фабрик для разных племен
+    
     private Map<String, OrcBuilderFactory> factoryMap;
 
     public OrcArmyView() {
@@ -39,29 +39,29 @@ public class OrcArmyView {
     }
 
     private void initializeGUI() {
-        // Создаем основное окно
+        
         frame = new JFrame("Армия Мордора");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
 
-        // Корневой узел дерева
+       
         root = new DefaultMutableTreeNode("Армия Мордора");
         treeModel = new DefaultTreeModel(root);
         armyTree = new JTree(treeModel);
 
         JScrollPane treeScrollPane = new JScrollPane(armyTree);
 
-        // Создаем панель информации об орке
+        
         infoPanel = new OrcInfoPanel();
 
-        // Разделяем окно на две части: дерево и панель информации
+        
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeScrollPane, infoPanel);
         splitPane.setDividerLocation(300);
 
-        // Добавляем кнопку создания нового орка
+        
         createOrcButton = new JButton("Создать нового орка");
 
-        // Добавляем элементы выбора племени и роли
+
         tribeComboBox = new JComboBox<>(new String[]{"Мордор", "Дол Гулдур", "Мглистые Горы"});
         roleComboBox = new JComboBox<>(new String[]{"Базовый", "Командир", "Разведчик"});
 
@@ -75,7 +75,7 @@ public class OrcArmyView {
         frame.add(splitPane, BorderLayout.CENTER);
         frame.add(controlPanel, BorderLayout.NORTH);
 
-        // Настройка слушателей событий
+
         createOrcButton.addActionListener(new CreateOrcButtonListener());
         armyTree.addTreeSelectionListener(new TreeSelectionHandler());
 
