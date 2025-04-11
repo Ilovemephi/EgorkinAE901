@@ -43,7 +43,7 @@ public class DolGuldurOrcBuilder extends OrcBuilder {
 
     @Override
     public void buildDexterity() {
-        this.orc.setStrength(60);
+        this.orc.setDexterity(50);
     }
 
     @Override
