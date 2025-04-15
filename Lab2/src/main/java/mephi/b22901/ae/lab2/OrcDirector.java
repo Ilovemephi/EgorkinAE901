@@ -10,17 +10,14 @@ public class OrcDirector {
         this.builder = builder;
     }
     
-    // Метод для установки строителя
     public void setBuilder(OrcBuilder builder) {
         this.builder = builder;
     }
     
     public Orc createBasicOrk() {
-        builder.createNewOrс();
         builder.buildName();
         builder.buildWeapon();
         builder.buildArmor();
-        builder.buildBanner();
         builder.buildStrength();
         builder.buildDexterity();
         builder.buildIq();
@@ -29,12 +26,11 @@ public class OrcDirector {
     }
     
     public Orc createLeaderOrk() {
-        builder.createNewOrс();
         builder.buildName();
         builder.buildWeapon(); 
         builder.buildArmor();
         builder.buildBanner(); 
-        //builder.buildScoutWeapon();
+        builder.buildLeaderWeapon();
         builder.buildStrength();
         builder.buildDexterity();
         builder.buildIq();
@@ -43,7 +39,6 @@ public class OrcDirector {
     }
     
     public Orc createScoutOrk() {
-        builder.createNewOrс();
         builder.buildName();
         builder.buildScoutWeapon();
         builder.buildArmor();

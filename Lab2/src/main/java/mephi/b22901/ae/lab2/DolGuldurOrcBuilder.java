@@ -10,23 +10,16 @@ import java.util.Set;
 
 
 
-public class DolGuldurOrcBuilder implements OrcBuilder {
-    private Orc orc;
+public class DolGuldurOrcBuilder extends OrcBuilder {
     private DolGuldurGearFactory dggf;
     
     public DolGuldurOrcBuilder (DolGuldurGearFactory dggf){
         this.dggf = dggf;
     }
 
-    @Override
-    public void createNewOrс() {
-       this.orc = new Orc();
-    }
+    
 
-    @Override
-    public void buildName() {
-        this.orc.setName(Faker.instance().lordOfTheRings().character());
-    }
+    
 
     @Override
     public void buildWeapon() {
@@ -50,7 +43,7 @@ public class DolGuldurOrcBuilder implements OrcBuilder {
 
     @Override
     public void buildDexterity() {
-        this.orc.setStrength(60);
+        this.orc.setDexterity(50);
     }
 
     @Override

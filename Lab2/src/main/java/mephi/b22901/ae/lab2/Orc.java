@@ -78,4 +78,16 @@ public class Orc {
         }
     }
     
+    
+    @Override
+public String toString() {
+    return String.format(
+        "Орк: %s%n" +
+        name != null ? name : "Безымянный орк"// Если имя не задано, используем "Безымянный орк"
+        
+    );
+}
+    
+    
+    
 }

@@ -1,18 +1,31 @@
 package mephi.b22901.ae.lab2;
 
-public interface OrcBuilder { 
-    void createNewOrс();
-    void buildName();
-    void buildWeapon();
-    void buildScoutWeapon();
-    void buildLeaderWeapon();
-    void buildArmor();
-    void buildBanner();
-    void buildStrength();
-    void buildDexterity();
-    void buildIq();
-    void buildHealth();
-    Orc getOrc();
+import com.github.javafaker.Faker;
+
+public abstract class OrcBuilder { 
+    protected Orc orc;
+    
+    public OrcBuilder(){
+        this.orc = new Orc();
+    }
+       
+
+    public void buildName(){
+        this.orc.setName("Orc " + Faker.instance().lordOfTheRings().character() + "morg");
+    }
+    public abstract void buildWeapon();
+    public abstract void buildScoutWeapon();
+    public abstract void buildLeaderWeapon();
+    public abstract void buildArmor();
+    public abstract void buildBanner();
+    public abstract void buildStrength();
+    public abstract void buildDexterity();
+    public abstract void buildIq();
+    public abstract void buildHealth();
+    
+    public Orc getOrc(){
+        return this.orc;
+    }
     
     
 }

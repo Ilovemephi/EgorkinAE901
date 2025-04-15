@@ -4,23 +4,16 @@ package mephi.b22901.ae.lab2;
 import com.github.javafaker.Faker;
 
 
-public class MistyMountainsOrcBuilder implements OrcBuilder {
-    private Orc orc;
+public class MistyMountainsOrcBuilder extends OrcBuilder {
     private MistyMountainsGearFactory mmgf;
     
     public MistyMountainsOrcBuilder(MistyMountainsGearFactory mmgf){
         this.mmgf = mmgf;
     }
 
-    @Override
-    public void createNewOrс() {
-        this.orc = new Orc();
-    }
+   
 
-    @Override
-    public void buildName() {
-        this.orc.setName(Faker.instance().lordOfTheRings().character());
-    }
+
 
     @Override
     public void buildWeapon() {
